@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="ButtonDo" Content="Го" HorizontalAlignment="Left" Height="75" Margin="95,234,0,0" VerticalAlignment="Top" Width="319" FontFamily="Magneto" FontSize="16" Click="ButtonDo_Click"/>
-        <TextBlock x:Name="Tb" TextWrapping="Wrap" Text="TextBl`ock"/>
-
+        <Button x:Name="ButtonDo" Content="Го" HorizontalAlignment="Left" Height="75" Margin="95,234,0,0" VerticalAlignment="Top" Width="319" FontFamily="Magneto" FontSize="16" Click="ButtonDo_Click"></Button>
+        <CheckBox x:Name="CB1" Content="one`s res" HorizontalAlignment="Left" Height="44" Margin="509,171,0,0" VerticalAlignment="Top" Width="122" Checked="CB1_Checked" Unchecked="CB1_Unchecked"/>
+        <TextBox x:Name="WidthTB" TextWrapping="Wrap" Margin="94,110,522,278" RenderTransformOrigin="0.491,0.497" Opacity="0"/>
+        <TextBox x:Name="HeightTB" TextWrapping="Wrap" Margin="294,110,322,278" RenderTransformOrigin="0.491,0.497" Opacity="0"/>
     </Grid>
 </Window>

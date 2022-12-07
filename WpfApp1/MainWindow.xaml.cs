@@ -10,6 +10,7 @@ namespace WpfApp1
     {
         public MainWindow()
         {
+            
             InitializeComponent();
         }
 
@@ -24,26 +25,58 @@ namespace WpfApp1
               string[] photos = _FileDialog.FileNames;
               _OpenFolderBrowser.ShowDialog();
               _FolderPath = _OpenFolderBrowser.SelectedPath;
-            for (int i = 0; i < photos.Length; i++)
+                if(CB1.IsChecked==false)
+                {
+                for (int i = 0; i < photos.Length; i++)
+                {
+                    Image image = Image.FromFile(photos[i]);
+                    string _photoname = Path.GetFileName(photos[i]);
+                    string _path = _FolderPath + @"\" + image.Width.ToString() + "x" + image.Height.ToString();
+                    if (Directory.Exists(_path))
+                    {
+                        File.Copy(photos[i], _path + @"\" + _photoname, true);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(_path);
+                        File.Copy(photos[i], _path + @"\" + _photoname, true);
+                    }
+                    image.Dispose();
+                }
+            }
+            else 
             {
-                Image image = Image.FromFile(photos[i]);
-                string _photoname = Path.GetFileName(photos[i]);
-                string _path = _FolderPath + @"\" + image.Width.ToString() + "x" + image.Height.ToString();
-                if (Directory.Exists(_path))
+                int width = int.Parse(WidthTB.Text);
+                int height = int.Parse(HeightTB.Text);
+                string _path = _FolderPath + @"\" + WidthTB.Text + "x" + HeightTB.Text;
+                Directory.CreateDirectory(_path);
+                for (int i = 0; i < photos.Length; i++)
                 {
-                    File.Copy(photos[i], _path + @"\" + _photoname, true);
+                    Image image = Image.FromFile(photos[i]);
+                    string _photoname = Path.GetFileName(photos[i]);
+                    if(image.Width == width & image.Height ==height)
+                    {
+                        File.Copy(photos[i], _path + @"\" + _photoname, true);
+                    }
+                    else
+                    {
+                        image.Dispose();
+                    }
+                    image.Dispose();
                 }
-                else
-                {
-                    Directory.CreateDirectory(_path);
-                    File.Copy(photos[i], _path + @"\" + _photoname, true);
-
-                }
-                image.Dispose();
-
             }
         }
 
-       
+        private void CB1_Checked(object sender, RoutedEventArgs e)
+        {
+            WidthTB.Opacity = 100;
+            HeightTB.Opacity = 100;
+        }
+
+        private void CB1_Unchecked(object sender, RoutedEventArgs e)
+        {
+            WidthTB.Opacity = 0;
+            HeightTB.Opacity = 0;
+        }
     }
 }
